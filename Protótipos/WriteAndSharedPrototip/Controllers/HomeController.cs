@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WriteAndSharedPrototip.Models;
@@ -21,6 +22,17 @@ namespace WriteAndSharedPrototip.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Authorize]
+        public IActionResult Secret()
+        {
+            return View();
+        }
+
+        public IActionResult Authenticate()
+        {
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
