@@ -1,20 +1,29 @@
 image: node:latest
 
-build:
-    stage: build
-cache:
-    paths:
-        - node_modules/
-        script:
-- npm install --quiet
-- npm run build-prod
-artifacts:
-    paths:
-        - dist/
+  before_script:
+    - cd /Front-End/angular-gitlab-ci-test
 
-        test:
+  stages: 
+    - build
+    - test
+
+
+  build:
+        stage: build
+    cache:
+        paths:
+            - node_modules/
+        script:
+            - npm install --quiet
+            - npm run build-prod
+    artifacts:
+         paths:
+               - dist/
+      
+
+test:
 stage: test
-cache:
+  cache:
     policy: pull
 paths:
     - node_modules/
