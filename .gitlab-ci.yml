@@ -1,6 +1,7 @@
-image: node:4.4.2
+image: node:latest
 
 stages: 
+        - test
         - build
 
  cache:
