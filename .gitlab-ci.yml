@@ -1,5 +1,4 @@
 
-
 test:karma:
   stage: test
   image: trion/ng-cli-karma
