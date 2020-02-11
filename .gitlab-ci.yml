@@ -1,29 +1,25 @@
-
-
 stages:
   - build
   - test
 
-
 build:
- stage: build
- image: trion/ng-cli
+  stage: build
+  image: trion/ng-cli
 
- before_script:
-  - npm ci
-  
- script:
-  - cd ./Front-End/angular-gitlab-ci-test
-  - ng build --prod
-  
- artifacts:
-  expire_in: 1 day
-  paths:
-   - dist/
-   
- tags:
-  - docker
+  before_script:
+    - npm ci
 
+  script:
+    - cd ./Front-End/angular-gitlab-ci-test
+    - ng build --prod
+
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist/
+
+  tags:
+    - docker
 
 test:karma:
   stage: test
