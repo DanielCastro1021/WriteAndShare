@@ -23,7 +23,6 @@ build:
 
 
 test: 
-  karma:
     stage: test
     image: trion/ng-cli-karma
     allow_failure: false
