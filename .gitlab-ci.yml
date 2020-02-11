@@ -1,9 +1,7 @@
 image: node:4.4.2
 
-
- stages: 
+stages: 
         - build
-        - test
 
  cache:
          - ./Front-End/angular-gitlab-ci-test/ node_modules/
