@@ -1,10 +1,15 @@
-before_script:
-  - cd ./Front-End/angular-gitlab-ci-test
-  - npm install
 
-test:
-  script: ng test --code-coverage --progress false --watch false
+
+test:karma:
+  stage: test
+  image: trion/ng-cli-karma
+  allow_failure: false
+  script:
+    - cd ./Front-End/angular-gitlab-ci-test
+    - ng test --code-coverage --progress false --watch false
   coverage: '/Lines \W+: (\d+\.\d+)%.*/'
   artifacts:
     paths:
       - coverage/
+  tags:
+    - docker
