@@ -1,35 +1,31 @@
-stages:
-  - build
-  - test
+image: trion/ng-cli-karma
 
-build:
-  stage: build
-  image: trion/ng-cli
+cache:
+  paths:
+    - node_modules/
 
-  before_script:
-    - npm ci
-
+deploy_stage:
+  stage: deploy
+  environment: Stage
+  only:
+    - master
   script:
-    - cd ./Front-End/angular-gitlab-ci-test
-    - ng build --prod
+    - rm ./package-lock.json
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng test --progress false --single-run=true --watch=false
+    - ./node_modules/@angular/cli/bin/ng e2e --progress false --watch=false
+    - ./node_modules/@angular/cli/bin/ng build --progress false --prod --base-href plus1-stage.surge.sh
+    - ./node_modules/.bin/surge -p dist/ --domain plus1-stage.surge.sh
 
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - dist/
-
-  tags:
-    - docker
-
-test:karma:
-  stage: test
-  image: trion/ng-cli-karma
-  allow_failure: false
+deploy_production:
+  stage: deploy
+  environment: Production
+  only:
+    - tags
   script:
-    - ng test --code-coverage --progress false --watch false
-  coverage: '/Lines \W+: (\d+\.\d+)%.*/'
-  artifacts:
-    paths:
-      - coverage/
-  tags:
-    - docker
+    - rm ./package-lock.json
+    - npm install
+    - ./node_modules/@angular/cli/bin/ng test --progress false --single-run=true  --watch=false
+    - ./node_modules/@angular/cli/bin/ng e2e --progress false --watch=false
+    - ./node_modules/@angular/cli/bin/ng build --progress false --prod --base-href plus1.surge.sh
+    - ./node_modules/.bin/surge -p dist/ --domain plus1.surge.sh
