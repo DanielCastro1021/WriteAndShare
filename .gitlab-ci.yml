@@ -19,19 +19,18 @@ build:
   paths:
    - dist/
    
- tags:
-  - docker
 
 
-test:karma:
-  stage: test
-  image: trion/ng-cli-karma
-  allow_failure: false
-  script:
-    - ng test --code-coverage --progress false --watch false
-  coverage: '/Lines \W+: (\d+\.\d+)%.*/'
-  artifacts:
-    paths:
-      - coverage/
-  tags:
-    - docker
+
+test: 
+  karma:
+    stage: test
+    image: trion/ng-cli-karma
+    allow_failure: false
+    script:
+        - ng test --code-coverage --progress false --watch false
+    coverage: '/Lines \W+: (\d+\.\d+)%.*/'
+    artifacts:
+        paths:
+        - coverage/
+
