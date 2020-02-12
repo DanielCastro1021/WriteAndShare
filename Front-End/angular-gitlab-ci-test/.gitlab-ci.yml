@@ -24,7 +24,7 @@ setup:
 tests:
   stage: test
   script:
-    - npm run test-headless
+    - npm run test
 
 # build dist
 build:
