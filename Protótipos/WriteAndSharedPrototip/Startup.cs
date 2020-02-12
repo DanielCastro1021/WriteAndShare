@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WriteAndSharedPrototip.Installers;
 
 namespace WriteAndSharedPrototip
 {
@@ -20,9 +21,10 @@ namespace WriteAndSharedPrototip
 
         public IConfiguration Configuration { get; }
 
-         public void ConfigureServices(IServiceCollection services)
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.InstallServicesInAssembly(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,20 +36,26 @@ namespace WriteAndSharedPrototip
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+
+            app.UseAuthentication();
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+                c.RoutePrefix = string.Empty;
+            });
+
             app.UseRouting();
-
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllers();
+
             });
         }
     }
