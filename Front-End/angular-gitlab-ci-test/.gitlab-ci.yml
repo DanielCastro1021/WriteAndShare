@@ -13,20 +13,26 @@ stages:
   - build
   - deploy
 
-
 # install node packages
 setup:
   stage: setup
   script:
     - cd Front-End/angular-gitlab-ci-test/
     - npm install
+    - npm rebuild 
 
 # run karma
-tests:
+test1:
   stage: test
   script:
     - cd Front-End/angular-gitlab-ci-test/
     - npm run test-headless
+
+test2:
+  stage: test
+  script:
+    - cd Front-End/angular-gitlab-ci-test/
+    - npm run e2e
 
 # build dist
 build:
@@ -37,4 +43,3 @@ build:
   artifacts:
     paths:
       - dist/
-
