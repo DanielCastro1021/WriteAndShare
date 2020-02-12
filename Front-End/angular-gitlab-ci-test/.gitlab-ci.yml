@@ -41,9 +41,17 @@ test1:
   script:
     - cd Front-End/angular-gitlab-ci-test/
     - npm run test-ci
+  coverage: '/Lines \W+: (\d+\.\d+)%.*/'
+  artifacts:
+    paths:
+      - coverage/
 
 test2:
   stage: test
   script:
     - cd Front-End/angular-gitlab-ci-test/
     - npm run e2e-ci
+  coverage: '/Lines \W+: (\d+\.\d+)%.*/'
+  artifacts:
+    paths:
+      - coverage/
