@@ -17,17 +17,17 @@ stages:
 job 1:
   stage: test
   script:
-    - Front-End/angular-gitlab-ci-test/node_modules/bin/ng  test-headless
+    - Front-End/angular-gitlab-ci-test/node_modules/.bin/ng  test-headless
 
 job 2:
   stage: test
   script:
-    - Front-End/angular-gitlab-ci-test/node_modules/bin/ng e2e
+    - Front-End/angular-gitlab-ci-test/node_modules/.bin/ng e2e
 
 release_job:
   stage: build
   script:
-    - Front-End/angular-gitlab-ci-test/node_modules/bin/ng build --prod --aot
+    - Front-End/angular-gitlab-ci-test/node_modules/.bin/ng build --prod --aot
   artifacts:
     name: 'project-$CI_COMMIT_REF_NAME'
     paths:
