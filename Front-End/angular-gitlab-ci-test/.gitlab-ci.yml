@@ -18,10 +18,15 @@ job 1:
   script:
     - npm test
 
+job 2:
+  stage: test
+  script:
+    - npm run e2e
+    
 release_job:
   stage: build
   script:
-    - Front-End/angular-gitlab-ci-test/node_modules/.bin/ng build --prod --aot
+    - npm run build --prod --aot
   artifacts:
     name: "project-$CI_COMMIT_REF_NAME"
     paths:
