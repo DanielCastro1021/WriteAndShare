@@ -16,12 +16,12 @@ stages:
 job 1:
   stage: test
   script:
-    - npm run test-headless
+    - Front-End/angular-gitlab-ci-test/node_modules/.bin/ng test
 
 job 2:
   stage: test
   script:
-    - npm run e2e
+    - Front-End/angular-gitlab-ci-test/node_modules/.bin/ng e2e
 
 release_job:
   stage: build
