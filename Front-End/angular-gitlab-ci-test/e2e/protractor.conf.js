@@ -3,6 +3,7 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
 const { SpecReporter } = require("jasmine-spec-reporter");
+const puppeteer = require("puppeteer");
 
 /**
  * @type { import("protractor").Config }
@@ -12,7 +13,8 @@ exports.config = {
   specs: ["./src/**/*.e2e-spec.ts"],
   capabilities: {
     chromeOptions: {
-      args: ["--headless"]
+      args: ["--headless", "--no-sandbox"],
+      binary: puppeteer.executablePath()
     },
     browserName: "chrome"
   },
