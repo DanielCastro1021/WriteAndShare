@@ -18,18 +18,21 @@ stages:
 setup:
   stage: setup
   script:
+    - cd Front-End/angular-gitlab-ci-test/
     - npm install
 
 # run karma
 tests:
   stage: test
   script:
+    - cd Front-End/angular-gitlab-ci-test/
     - npm run test
 
 # build dist
 build:
   stage: build
   script:
+    - cd Front-End/angular-gitlab-ci-test/
     - npm run build
   artifacts:
     paths:
