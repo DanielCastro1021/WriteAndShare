@@ -18,8 +18,9 @@ setup:
   stage: setup
   script:
     - cd Front-End/angular-gitlab-ci-test/
+    - npm install -g @angular/cli
     - npm install
-    - npm rebuild 
+    - npm rebuild
 
 # run karma
 test1:
