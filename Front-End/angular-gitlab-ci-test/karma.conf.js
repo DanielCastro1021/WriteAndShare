@@ -1,7 +1,5 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
-const puppeteer = require("puppeteer");
-process.env.CHROME_BIN = puppeteer.executablePath();
 
 module.exports = function(config) {
   config.set({
@@ -18,7 +16,7 @@ module.exports = function(config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      dir: require("path").join(__dirname, "../coverage"),
+      dir: require("path").join(__dirname, "./coverage/angular-gitlab-ci-test"),
       reports: ["html", "lcovonly", "text-summary"],
       fixWebpackSourcePaths: true
     },
@@ -28,12 +26,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ["Chrome"],
-    customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-        base: "ChromeHeadless",
-        flags: ["--no-sandbox"]
-      }
-    },
-    singleRun: false
+    singleRun: false,
+    restartOnFileChange: true
   });
 };
