@@ -12,7 +12,7 @@ export class AuthenticationComponent implements OnInit {
   @Input() userData: User = new User();
 
   constructor(
-    public authencticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private router: Router
   ) {}
 
@@ -36,11 +36,12 @@ export class AuthenticationComponent implements OnInit {
    * This function authenticates the credentials of a user, in the the REST API.
    */
   serviceLogin(): void {
-    this.authencticationService
+    this.authenticationService
       .login(this.userData.username, this.userData.password)
       .subscribe(
         result => {
-          this.router.navigate(["/campaigns"]);
+          //TODO:Add correct route
+          this.router.navigate(["/feed"]);
         },
         err => {
           console.log(err);

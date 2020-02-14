@@ -9,6 +9,7 @@ import { map, catchError, tap } from "rxjs/operators";
 import { Observable, of } from "rxjs";
 import { User } from "../../models/User";
 
+//TODO: Add correct route
 const endpoint = "http://localhost:3000/api/auth/";
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,6 +27,7 @@ export class AuthenticationService {
    * @param password This is a string, with the password of a User.
    */
   login(username: string, password: string) {
+    //TODO: Add correct endpoint
     return this.http
       .post<any>(endpoint + "login", { username, password })
       .pipe(
@@ -45,6 +47,7 @@ export class AuthenticationService {
    */
   logout() {
     localStorage.removeItem("currentUser");
+    //TODO: Add correct endpoint
     return this.http.get<any>(endpoint + "logout");
   }
 
@@ -53,6 +56,7 @@ export class AuthenticationService {
    * @param user This is a User.
    */
   register(user) {
+    //TODO: Add correct endpoint
     return this.http
       .post<any>(endpoint + "register", { user })
       .pipe(
@@ -71,6 +75,7 @@ export class AuthenticationService {
    * This function makes a http get request to REST API, for a authenticated user.
    */
   getMe() {
+    //TODO: Add correct endpoint
     return this.http.get<User>(endpoint + "profile");
   }
 
@@ -81,6 +86,7 @@ export class AuthenticationService {
    * @param userData This is a User.
    */
   updateMe(id: string, userData: User) {
+    //TODO: Add correct endpoint
     return this.http
       .put(endpoint + id, JSON.stringify(userData), httpOptions)
       .pipe(
@@ -94,6 +100,7 @@ export class AuthenticationService {
    * @param id This is an Object.Id that corresponds to a user, in REST API.
    */
   deleteMe(id) {
+    //TODO: Add correct endpoint
     return this.http.delete<any>(endpoint + id).pipe(
       tap(_ => console.log(`deleted User id=${id}`)),
       catchError(this.handleError<any>("deleteUser"))
@@ -105,6 +112,7 @@ export class AuthenticationService {
    * @param username This is the username of a User.
    */
   getUserByUsername(username) {
+    //TODO: Add correct endpoint
     return this.http.get<User>(endpoint + "user/" + username);
   }
 
@@ -112,6 +120,7 @@ export class AuthenticationService {
    * This function makes a http get request to REST API, for the user count, by role.
    */
   getUserRoles() {
+    //TODO: Add correct endpoint
     return this.http.get<User>(endpoint + "roles");
   }
 
