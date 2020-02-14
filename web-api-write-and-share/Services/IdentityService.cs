@@ -29,7 +29,7 @@ namespace web_api_write_and_share.Services
 
         public async Task<AuthenticationResult> LoginAsync(UserLoginRequest request)
         {
-            var user = datacontext.Users.SingleOrDefault(x => x.UserName == request.UserName);
+            var user = datacontext.Users.AsNoTracking().SingleOrDefault(x => x.UserName == request.UserName);
 
             if (user == null)
             {
@@ -50,18 +50,18 @@ namespace web_api_write_and_share.Services
 
         public async Task<User> GetUserByIdAsync(Guid userId)
         {
-            return datacontext.Users.SingleOrDefault(x => x.Id == userId);
+            return datacontext.Users.AsNoTracking().SingleOrDefault(x => x.Id == userId);
         }
 
         public async Task<List<User>> GetUsersAsync()
         {
-            return await datacontext.Users.ToListAsync();
+            return await datacontext.Users.AsNoTracking().ToListAsync();
         }
 
         public async Task<AuthenticationResult> RegisterAsync(UserRegistrationRequest request)
         {
 
-            if (datacontext.Users.Any(x => x.UserName == request.UserName))
+            if (datacontext.Users.AsNoTracking().Any(x => x.UserName == request.UserName))
                 return new AuthenticationResult
                 {
                     Errors = new[] { "O username que inseriu já se encontra em Uso" }
@@ -105,7 +105,7 @@ namespace web_api_write_and_share.Services
 
             if (!(userToUpdateActualName == dataToUpdate.UserName))
             {
-                if (datacontext.Users.Any(x => x.UserName == dataToUpdate.UserName))
+                if (datacontext.Users.AsNoTracking().Any(x => x.UserName == dataToUpdate.UserName))
                 {
                     return false;
                 }

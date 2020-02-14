@@ -21,7 +21,7 @@ namespace web_api_write_and_share.Installers
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(jwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);
-
+            
             services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddAuthentication(x =>
