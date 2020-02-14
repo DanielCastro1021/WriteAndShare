@@ -84,6 +84,7 @@ namespace web_api_write_and_share.Controllers
 
             });
         }
+
         [HttpGet(ApiRoutes.Identity.GetUserById)]
         public async Task<IActionResult> GetUserById(Guid userId)
         {

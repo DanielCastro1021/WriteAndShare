@@ -12,7 +12,7 @@ namespace web_api_write_and_share.Entities
         public Guid Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public List<Guid> FriendsList { get; set; }
+        public string FriendsList { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Roles { get; set; }
