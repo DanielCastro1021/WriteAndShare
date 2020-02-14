@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 using web_api_write_and_share.Contracts;
 using web_api_write_and_share.Controllers.Requests;
 using web_api_write_and_share.Controllers.Response;
+using web_api_write_and_share.Entities;
 
 namespace web_api_write_and_share.Controllers
 {
     public class UserController : Controller
     {
-
         private readonly IIdentityService identityService;
+
         public UserController(IIdentityService _identityService)
         {
             identityService = _identityService;
@@ -115,6 +116,7 @@ namespace web_api_write_and_share.Controllers
             {
                 return NotFound();
             }
+
             return NoContent();
         }
 
@@ -155,15 +157,29 @@ namespace web_api_write_and_share.Controllers
         }
 
         [HttpPut(ApiRoutes.Identity.AddFriend)]
-        public async Task<IActionResult> AddFriend(Guid userid, Guid userToAdd)
+        public async Task<IActionResult> AddFriend(Guid userid, [FromBody] Guid userToAdd)
         {
-            return Ok();
+            var added = await identityService.AddFriendAsync(userid, userToAdd);
+
+            if (added)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
 
         [HttpDelete(ApiRoutes.Identity.RemoveFriend)]
-        public async Task<IActionResult> RemoveFriend(Guid userid, Guid userToRemove)
+        public async Task<IActionResult> RemoveFriend(Guid userid, [FromBody] Guid userToRemove)
         {
-            return Ok(await identityService.RemoveFriendAsync(userid, userToRemove));
+            var removed = await identityService.RemoveFriendAsync(userid, userToRemove);
+
+            if (removed)
+            {
+                return NoContent();
+            }
+
+            return NotFound();
         }
 
         [HttpGet(ApiRoutes.Identity.GetAllFriends)]

@@ -11,7 +11,7 @@ namespace web_api_write_and_share.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-
+            
         }
         public DbSet<User> Users { get; set; }
     }
