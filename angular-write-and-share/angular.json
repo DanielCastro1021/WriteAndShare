@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "angular-write-and-share": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-write-and-share"
+    }
+  },
+  "defaultProject": "angular-write-and-share",
+  "cli": {
+    "analytics": "1e37f498-6d13-402f-907a-f8145529c5d3"
+  }
 }
