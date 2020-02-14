@@ -201,6 +201,9 @@ namespace web_api_write_and_share.Services
                 return false;
             }
 
+            Console.WriteLine(friend);
+            Console.WriteLine(friend.ToString());
+
             friendsIds = friendsIds + friend.ToString() + ";";
 
             User userToUpdate = new User
@@ -230,7 +233,7 @@ namespace web_api_write_and_share.Services
                 return false;
             }
 
-            friendsIds = friendsIds.Replace(friend.ToString(), "");
+            friendsIds = friendsIds.Replace(friend.ToString() + ";", "");
 
             User userToUpdate = new User
             {
