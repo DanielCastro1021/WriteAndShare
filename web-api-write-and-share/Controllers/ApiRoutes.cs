@@ -19,6 +19,9 @@ namespace web_api_write_and_share.Controllers
             public const string GetAllUsers = Base + "/identity/users";
             public const string DeleteUser = Base + "/identity/{userId}";
             public const string UpdateUser = Base + "/identity/{userId}";
+            public const string AddFriend = Base + "/friendslist/add";
+            public const string RemoveFriend = Base + "/friendslist/remove";
+            public const string GetAllFriends = Base + "/friendslist/friends";
         }
     }
 

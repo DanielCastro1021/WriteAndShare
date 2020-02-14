@@ -187,6 +187,30 @@ namespace web_api_write_and_share.Services
 
             return true;
         }
+
+        public Task<bool> AddFriendAsync(Guid user, Guid friend)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> RemoveFriendAsync(Guid user, Guid friend)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<User>> GetAllFriends(Guid user)
+        {
+            List<User> friends = new List<User>();
+            User requester = await this.GetUserByIdAsync(user);
+            String[] friendsIds = requester.FriendsList.Split(";");
+
+            for(int i=0; i<friendsIds.Length; i++)
+            {
+                friends.Add(await this.GetUserByIdAsync(Guid.Parse(friendsIds[i])));
+            }
+
+            return friends;
+        }
     }
 
 }

@@ -16,6 +16,9 @@ namespace web_api_write_and_share.Contracts
         Task<List<User>> GetUsersAsync();
         Task<bool> DeleteUserAsync(Guid userId);
         Task<bool> UpdateUserAsync(Guid user, UserUpdateRequest request);
+        Task<bool> AddFriendAsync(Guid user, Guid friend);
+        Task<bool> RemoveFriendAsync(Guid user, Guid friend);
+        Task<List<User>> GetAllFriends(Guid user);
     }
 
 }

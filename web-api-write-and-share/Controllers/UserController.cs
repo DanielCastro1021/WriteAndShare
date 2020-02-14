@@ -102,7 +102,6 @@ namespace web_api_write_and_share.Controllers
         [HttpGet(ApiRoutes.Identity.GetAllUsers)]
         public async Task<IActionResult> GetUsers()
         {
-
             return Ok(await identityService.GetUsersAsync());
 
         }
@@ -118,7 +117,6 @@ namespace web_api_write_and_share.Controllers
             }
             return NoContent();
         }
-
 
         [HttpPut(ApiRoutes.Identity.UpdateUser)]
         public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] UserUpdateRequest request)
@@ -154,6 +152,24 @@ namespace web_api_write_and_share.Controllers
                 return Ok(request);
             }
             return NotFound();
+        }
+
+        [HttpPut(ApiRoutes.Identity.AddFriend)]
+        public async Task<IActionResult> AddFriend(Guid userid, Guid userToAdd)
+        {
+            return Ok();
+        }
+
+        [HttpDelete(ApiRoutes.Identity.RemoveFriend)]
+        public async Task<IActionResult> RemoveFriend(Guid userid, Guid userToRemove)
+        {
+            return Ok(await identityService.RemoveFriendAsync(userid, userToRemove));
+        }
+
+        [HttpGet(ApiRoutes.Identity.GetAllFriends)]
+        public async Task<IActionResult> GetAllFriends(Guid userid)
+        {
+            return Ok(await identityService.GetAllFriends(userid));
         }
 
         private bool ValidatePassword(string password, out string ErrorMessage)
@@ -196,6 +212,8 @@ namespace web_api_write_and_share.Controllers
         {
             return new EmailAddressAttribute().IsValid(source);
         }
+
+
     }
 
 }
