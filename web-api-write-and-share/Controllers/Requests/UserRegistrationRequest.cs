@@ -18,7 +18,7 @@ namespace web_api_write_and_share.Controllers.Requests
         [Required]
         [Compare("Password")]
 
-        public string comparePassowrd { get; set; }
+        public string ComparePassword { get; set; }
     }
 
 }

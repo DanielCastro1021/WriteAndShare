@@ -31,7 +31,7 @@ namespace web_api_write_and_share.Controllers
                 return BadRequest(erro.ToString());
             }
 
-            if (!(request.Password == request.comparePassowrd))
+            if (!(request.Password == request.ComparePassword))
             {
                 return BadRequest(
                     new FailedResponse
