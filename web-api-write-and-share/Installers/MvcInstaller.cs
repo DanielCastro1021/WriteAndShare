@@ -18,8 +18,6 @@ namespace web_api_write_and_share.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-
-
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(jwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);
@@ -43,7 +41,6 @@ namespace web_api_write_and_share.Installers
                         ValidateAudience = false,
                         RequireExpirationTime = false,
                         ValidateLifetime = true
-
                     };
                 });
 
