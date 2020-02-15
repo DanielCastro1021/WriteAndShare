@@ -15,10 +15,10 @@
             <a mat-list-item href="/">
                 <mat-icon>trending_up</mat-icon>Trends
             </a>
-            <a mat-list-item href="#">
+            <a mat-list-item  *ngIf="isAuthenticated" href="#">
                 <mat-icon>group</mat-icon> Friends
             </a>
-            <a mat-list-item href="#">
+            <a mat-list-item  *ngIf="isAuthenticated" href="#">
                 <mat-icon>settings</mat-icon> Settings
             </a>
         </mat-nav-list>
@@ -32,13 +32,21 @@
             <span class="material-icons"></span>
             <span class="spacer"></span>
             <ul>
-                <button class="button_color" mat-button [matMenuTriggerFor]="menu" class="titulo">
+                <button class="button_color"  *ngIf="!isAuthenticated" mat-button [matMenuTriggerFor]="menu" class="titulo">
                     <i class="material-icons">account_circle</i>
                     Login/Registo
                 </button>
                 <mat-menu #menu="matMenu" xPosition="after">
                     <button mat-menu-item>Login</button>
                     <button mat-menu-item>Registar</button>
+                
+                </mat-menu>
+                <button class="button_color"  *ngIf="isAuthenticated" mat-button [matMenuTriggerFor]="menuAuthenticated" class="titulo">
+                    <i class="material-icons">account_circle</i>
+                   {{username}}
+                </button>
+                <mat-menu #menuAuthenticated="matMenu" xPosition="after">
+                    <button mat-menu-item>Perfil</button>
                     <button mat-menu-item>Logout</button>
                 </mat-menu>
             </ul>
