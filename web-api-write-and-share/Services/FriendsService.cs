@@ -61,12 +61,14 @@ namespace web_api_write_and_share.Services
 
         public async Task<List<User>> GetAllFriends(Guid user)
         {
-            Friends[] connections = await datacontext.Friends.AsNoTracking().Where(x => x.UserId == user).ToArrayAsync();
+            List<Friends> connections = await datacontext.Friends.AsNoTracking().Where(x => x.UserId == user).ToListAsync();
             List<User> friendsOfUser = new List<User>();
 
-            for(int i=0; i< connections.Length; i++)
+            int i = 0;
+            while(i < connections.Count)
             {
-                friendsOfUser.Add(await FindUser(connections[i].FriendOfUserId));
+                friendsOfUser.Add(await this.FindUser(connections[i].FriendOfUserId));
+                i++;
             }
 
             return friendsOfUser;

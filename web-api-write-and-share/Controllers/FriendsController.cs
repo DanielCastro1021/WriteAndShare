@@ -53,7 +53,7 @@ namespace web_api_write_and_share.Controllers
                 return NoContent();
             }
 
-            return Ok();
+            return Ok(list);
         }
     }
 }
