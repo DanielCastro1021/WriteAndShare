@@ -47,7 +47,7 @@ namespace web_api_write_and_share.Services
 
         public async Task<bool> RemoveFriendAsync(Guid user, Guid friend)
         {
-            if (!datacontext.Friends.Any(x => x.Id == user && x.FriendOfUserId == friend))
+            if (!datacontext.Friends.Any(x => x.UserId == user && x.FriendOfUserId == friend))
             {
                 return false;
             }
