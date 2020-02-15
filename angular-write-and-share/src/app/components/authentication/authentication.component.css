@@ -9,7 +9,7 @@ div {
 h2 {
   text-align: center;
   border-radius: 5px;
-  width: 100%;
+
   margin: 0 auto;
   align-self: center;
   color: white;
@@ -29,7 +29,6 @@ input[type="password"] {
 }
 
 button {
-  width: 50%;
   margin-right: 5px;
   background-color: #ffffff;
   color: black;
@@ -55,8 +54,11 @@ label {
 }
 .btn-group {
   width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .btn-group button {
+  width: 50%;
   background-color: black; /* Green background */
   border: 1px solid #d75b5a; /* Green border */
   color: white; /* White text */

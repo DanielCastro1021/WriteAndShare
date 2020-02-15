@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { User } from "src/app/models/User";
-import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -11,10 +10,7 @@ import { Router } from "@angular/router";
 export class AuthenticationComponent implements OnInit {
   @Input() userData: User = new User();
 
-  constructor(
-    public authenticationService: AuthenticationService,
-    private router: Router
-  ) {}
+  constructor() {}
 
   ngOnInit() {}
 
@@ -35,20 +31,5 @@ export class AuthenticationComponent implements OnInit {
   /**
    * This function authenticates the credentials of a user, in the the REST API.
    */
-  serviceLogin(): void {
-    this.authenticationService
-      .login(this.userData.username, this.userData.password)
-      .subscribe(
-        result => {
-          //TODO:Add correct route
-          this.router.navigate(["/feed"]);
-        },
-        err => {
-          console.log(err);
-          alert(
-            "Sorry we could not found you, please check if username and password are correct."
-          );
-        }
-      );
-  }
+  serviceLogin(): void {}
 }
