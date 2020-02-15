@@ -1,5 +1,17 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  inject
+} from "@angular/core/testing";
 import { AuthenticationComponent } from "./authentication.component";
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from "@angular/common/http/testing";
+import { AuthenticationService } from "src/app/services/authentication/authentication.service";
+import { Router } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe("AuthenticationComponent", () => {
   let component: AuthenticationComponent;
@@ -7,7 +19,9 @@ describe("AuthenticationComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthenticationComponent]
+      declarations: [AuthenticationComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [AuthenticationService]
     }).compileComponents();
   }));
 
@@ -17,7 +31,12 @@ describe("AuthenticationComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+  it(`should create`, async(
+    inject(
+      [HttpTestingController, AuthenticationService],
+      (service: AuthenticationService, router: Router) => {
+        expect(component).toBeTruthy();
+      }
+    )
+  ));
 });
