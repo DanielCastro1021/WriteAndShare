@@ -21,6 +21,7 @@ namespace web_api_write_and_share.Controllers
         [HttpPost(ApiRoutes.Identity.AddPost)]
         public async Task<IActionResult> AddPost(Guid userId, [FromBody] NewPostRequest newpost)
         {
+           
             var added = await postService.AddPostAsync(userId, newpost);
 
             if (added)
@@ -56,6 +57,19 @@ namespace web_api_write_and_share.Controllers
 
 
             return Ok(post);
+        }
+
+        [HttpGet(ApiRoutes.Identity.GetPostsByUser)]
+        public async Task<IActionResult> GetAllPostsByUser()
+        {
+            List<Post> postsList = await postService.GetAllPostsAsync();
+
+            if (postsList.Count == 0)
+            {
+                return NoContent();
+            }
+
+            return Ok(postsList);
         }
 
         [HttpGet(ApiRoutes.Identity.GetAllPosts)]
