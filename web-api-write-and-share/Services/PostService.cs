@@ -43,6 +43,11 @@ namespace web_api_write_and_share.Services
             return await datacontext.Posts.AsNoTracking().ToListAsync();
         }
 
+        public async Task<List<Post>> GetAllPostsByUserAsync(Guid userId)
+        {
+            return await datacontext.Posts.AsNoTracking().Where(x => x.Owner == userId).ToListAsync();
+        }
+
         public async Task<Post> GetPostByIdAsync(Guid postId)
         {
             return datacontext.Posts.AsNoTracking().SingleOrDefault(x => x.Id == postId);

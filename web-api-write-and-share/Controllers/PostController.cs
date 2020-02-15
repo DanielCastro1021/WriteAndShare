@@ -60,9 +60,9 @@ namespace web_api_write_and_share.Controllers
         }
 
         [HttpGet(ApiRoutes.Identity.GetPostsByUser)]
-        public async Task<IActionResult> GetAllPostsByUser()
+        public async Task<IActionResult> GetAllPostsByUser(Guid userId)
         {
-            List<Post> postsList = await postService.GetAllPostsAsync();
+            List<Post> postsList = await postService.GetAllPostsByUserAsync(userId);
 
             if (postsList.Count == 0)
             {

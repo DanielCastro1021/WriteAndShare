@@ -12,7 +12,7 @@ namespace web_api_write_and_share.Contracts
         Task<bool> AddPostAsync(Guid userId, NewPostRequest newpost);
         Task<bool> RemovePostAsync(Guid postId);
         Task<Post> GetPostByIdAsync(Guid postId);
-        Task<List<Post>> GetPostsByUserAsync(Guid userId);
+        Task<List<Post>> GetAllPostsByUserAsync(Guid userId);
         Task<List<Post>> GetAllPostsAsync();
         Task<bool> AddLikeToPostAsync(Guid postId);
     }
