@@ -11,10 +11,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AuthenticationComponent } from "./components/authentication/authentication.component";
+import { MainPageComponent } from './components/website/main-page/main-page.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthenticationComponent],
-  schemas: [NO_ERRORS_SCHEMA],
+  declarations: [
+    AppComponent,
+    MainPageComponent,AuthenticationComponent
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
