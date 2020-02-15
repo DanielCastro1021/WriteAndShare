@@ -48,6 +48,9 @@ namespace web_api_write_and_share.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("Owner")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("TAGS")
                         .HasColumnType("nvarchar(max)");
 
@@ -59,9 +62,6 @@ namespace web_api_write_and_share.Migrations
 
                     b.Property<long>("likes")
                         .HasColumnType("bigint");
-
-                    b.Property<Guid>("userId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

@@ -18,9 +18,9 @@ namespace web_api_write_and_share.Controllers
         }
 
         [HttpPut(ApiRoutes.Identity.AddFriend)]
-        public async Task<IActionResult> AddFriend(Guid userid, Guid userToAdd)
+        public async Task<IActionResult> AddFriend(Guid userId, Guid friendId)
         {
-            var added = await friendsService.AddFriendAsync(userid, userToAdd);
+            var added = await friendsService.AddFriendAsync(userId, friendId);
 
             if (added)
             {
@@ -31,9 +31,9 @@ namespace web_api_write_and_share.Controllers
         }
 
         [HttpDelete(ApiRoutes.Identity.RemoveFriend)]
-        public async Task<IActionResult> RemoveFriend(Guid userid, Guid userToRemove)
+        public async Task<IActionResult> RemoveFriend(Guid userId, Guid friendId)
         {
-            var removed = await friendsService.RemoveFriendAsync(userid, userToRemove);
+            var removed = await friendsService.RemoveFriendAsync(userId, friendId);
 
             if (removed)
             {
@@ -44,9 +44,9 @@ namespace web_api_write_and_share.Controllers
         }
 
         [HttpGet(ApiRoutes.Identity.GetAllFriends)]
-        public async Task<IActionResult> GetAllFriends(Guid userid)
+        public async Task<IActionResult> GetAllFriends(Guid userId)
         {
-            List<User> friendsList = await friendsService.GetAllFriends(userid);
+            List<User> friendsList = await friendsService.GetAllFriends(userId);
 
             if(friendsList.Count == 0)
             {

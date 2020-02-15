@@ -9,7 +9,7 @@ namespace web_api_write_and_share.Contracts
 {
     public interface IPostService
     {
-        Task<bool> AddPostAsync(NewPostRequest newpost);
+        Task<bool> AddPostAsync(Guid userId, NewPostRequest newpost);
         Task<bool> RemovePostAsync(Guid postId);
         Task<Post> GetPostByIdAsync(Guid postId);
         Task<List<Post>> GetAllPostsAsync();

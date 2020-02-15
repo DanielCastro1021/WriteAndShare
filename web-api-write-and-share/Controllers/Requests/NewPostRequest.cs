@@ -15,8 +15,6 @@ namespace web_api_write_and_share.Controllers.Requests
         [Required]
         public string Body { get; set; }
         [Required]
-        public Guid Owner { get; set; }
-        [Required]
         public string TAGS { get; set; }
         [Required]
         public DateTime Date { get; set; }

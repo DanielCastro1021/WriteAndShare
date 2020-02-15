@@ -18,42 +18,42 @@ namespace web_api_write_and_share.Services
             datacontext = _datacontext;
         }
 
-        public async Task<bool> AddFriendAsync(Guid user, Guid friend)
+        public async Task<bool> AddFriendAsync(Guid userId, Guid friendId)
         {
 
-            if (datacontext.Friends.Any(x => x.Id == user && x.FriendOfUserId == friend))
+            if (datacontext.Friends.Any(x => x.Id == userId && x.FriendOfUserId == friendId))
             {
                 return false;
             }
 
             Friends friendsConnection = new Friends
             {
-                UserId = user,
-                FriendOfUserId = friend
+                UserId = userId,
+                FriendOfUserId = friendId
             };
 
             Friends otherConnection = new Friends
             {
-                UserId = friend,
-                FriendOfUserId = user
+                UserId = friendId,
+                FriendOfUserId = userId
             };
 
-            datacontext.Friends.Update(friendsConnection);
-            datacontext.Friends.Update(otherConnection);
+            datacontext.Friends.Add(friendsConnection);
+            datacontext.Friends.Add(otherConnection);
             var updated = await datacontext.SaveChangesAsync();
 
             return updated > 0;
         }
 
-        public async Task<bool> RemoveFriendAsync(Guid user, Guid friend)
+        public async Task<bool> RemoveFriendAsync(Guid userId, Guid friendId)
         {
-            if (!datacontext.Friends.Any(x => x.UserId == user && x.FriendOfUserId == friend))
+            if (!datacontext.Friends.Any(x => x.UserId == userId && x.FriendOfUserId == friendId))
             {
                 return false;
             }
 
-            datacontext.Friends.Remove(await this.FindConnectionsId(user, friend));
-            datacontext.Friends.Remove(await this.FindConnectionsId(friend, user));
+            datacontext.Friends.Remove(await this.FindConnectionsId(userId, friendId));
+            datacontext.Friends.Remove(await this.FindConnectionsId(friendId, userId));
             var deleted = await datacontext.SaveChangesAsync();
 
             return deleted > 0;
@@ -74,14 +74,14 @@ namespace web_api_write_and_share.Services
             return friendsOfUser;
         }
 
-        private async Task<Friends> FindConnectionsId(Guid user, Guid friend)
+        private async Task<Friends> FindConnectionsId(Guid userId, Guid friendId)
         {
-            return datacontext.Friends.AsNoTracking().SingleOrDefault(x => x.UserId == user && x.FriendOfUserId == friend);
+            return datacontext.Friends.AsNoTracking().SingleOrDefault(x => x.UserId == userId && x.FriendOfUserId == friendId);
         }
 
-        private async Task<User> FindUser(Guid user)
+        private async Task<User> FindUser(Guid userId)
         {
-            return datacontext.Users.AsNoTracking().SingleOrDefault(x => x.Id == user);
+            return datacontext.Users.AsNoTracking().SingleOrDefault(x => x.Id == userId);
         }
     }
 }

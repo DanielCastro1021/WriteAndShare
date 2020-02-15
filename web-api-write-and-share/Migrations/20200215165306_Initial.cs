@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace web_api_write_and_share.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,8 +26,9 @@ namespace web_api_write_and_share.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(nullable: true),
+                    Upload = table.Column<byte[]>(nullable: true),
                     Body = table.Column<string>(nullable: true),
-                    userId = table.Column<Guid>(nullable: false),
+                    Owner = table.Column<Guid>(nullable: false),
                     likes = table.Column<long>(nullable: false),
                     TAGS = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false)

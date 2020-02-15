@@ -19,7 +19,7 @@ namespace web_api_write_and_share.Services
             datacontext = _datacontext;
         }
 
-        public async Task<bool> AddPostAsync(NewPostRequest newpost)
+        public async Task<bool> AddPostAsync(Guid userId, NewPostRequest newpost)
         {
             Post post = new Post
             {
@@ -28,7 +28,7 @@ namespace web_api_write_and_share.Services
                 Body = newpost.Body,
                 Date = newpost.Date,
                 TAGS = newpost.TAGS,
-                userId = newpost.Owner,
+                Owner = userId,
                 likes = 0
             };
 

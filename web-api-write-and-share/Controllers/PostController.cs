@@ -19,9 +19,9 @@ namespace web_api_write_and_share.Controllers
         }
 
         [HttpPost(ApiRoutes.Identity.AddPost)]
-        public async Task<IActionResult> AddPost([FromBody] NewPostRequest newpost)
+        public async Task<IActionResult> AddPost(Guid userId, [FromBody] NewPostRequest newpost)
         {
-            var added = await postService.AddPostAsync(newpost);
+            var added = await postService.AddPostAsync(userId, newpost);
 
             if (added)
             {
