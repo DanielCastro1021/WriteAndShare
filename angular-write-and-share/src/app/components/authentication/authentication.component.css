@@ -42,6 +42,7 @@ button:hover {
   background-color: #ccc;
 }
 label {
+  color: white;
   float: left;
   width: 10em;
   margin-right: 1em;
@@ -58,9 +59,9 @@ label {
 }
 .btn-group button {
   width: 50%;
-  background-color: black; /* Green background */
+  background-color: white; /* Green background */
   border: 1px solid #d75b5a; /* Green border */
-  color: white; /* White text */
+  color: black; /* White text */
   padding: 10px 24px; /* Some padding */
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
