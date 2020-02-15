@@ -37,7 +37,7 @@ namespace web_api_write_and_share.Controllers
 
             if (removed)
             {
-                return NoContent();
+                return Ok();
             }
 
             return NotFound();
@@ -46,14 +46,14 @@ namespace web_api_write_and_share.Controllers
         [HttpGet(ApiRoutes.Identity.GetAllFriends)]
         public async Task<IActionResult> GetAllFriends(Guid userid)
         {
-            List<User> list = await friendsService.GetAllFriends(userid);
+            List<User> friendsList = await friendsService.GetAllFriends(userid);
 
-            if(list.Count == 0)
+            if(friendsList.Count == 0)
             {
                 return NoContent();
             }
 
-            return Ok(list);
+            return Ok(friendsList);
         }
     }
 }

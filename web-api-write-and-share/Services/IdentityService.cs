@@ -90,7 +90,23 @@ namespace web_api_write_and_share.Services
         {
             var user = await GetUserByIdAsync(userId);
 
+            await this.DeleteConnectionsOfUserAsync(userId);
             datacontext.Users.Remove(user);
+            var deleted = await datacontext.SaveChangesAsync();
+            return deleted > 0;
+        }
+
+        private async Task<bool> DeleteConnectionsOfUserAsync(Guid id)
+        {
+            List<Friends> connections = await datacontext.Friends.AsNoTracking().Where(x => x.UserId == id || x.FriendOfUserId == id).ToListAsync();
+
+            int i = 0;
+            while (i < connections.Count)
+            {
+                datacontext.Remove(connections[i]);
+                i++;
+            }
+
             var deleted = await datacontext.SaveChangesAsync();
             return deleted > 0;
         }
