@@ -1,33 +1,73 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using web_api_write_and_share.Contracts;
 using web_api_write_and_share.Controllers.Requests;
+using web_api_write_and_share.Data;
 using web_api_write_and_share.Entities;
 
 namespace web_api_write_and_share.Services
 {
     public class PostService : IPostService
     {
-        public Task<bool> AddPostAsync(NewPostRequest newpost)
+        private readonly DataContext datacontext;
+
+        public PostService(DataContext _datacontext)
         {
-            throw new NotImplementedException();
+            datacontext = _datacontext;
         }
 
-        public Task<List<Post>> GetAllPosts()
+        public async Task<bool> AddPostAsync(NewPostRequest newpost)
         {
-            throw new NotImplementedException();
+            Post post = new Post
+            {
+                Title = newpost.Title,
+                Upload = newpost.Upload,
+                Body = newpost.Body,
+                Date = newpost.Date,
+                TAGS = newpost.TAGS,
+                userId = newpost.Owner,
+                likes = 0
+            };
+
+            datacontext.Posts.Add(post);
+            var added = await datacontext.SaveChangesAsync();
+
+            return added > 0;
         }
 
-        public Task<Post> GetPostByIdAsync(Guid postId)
+        public async Task<List<Post>> GetAllPostsAsync()
         {
-            throw new NotImplementedException();
+            return await datacontext.Posts.AsNoTracking().ToListAsync();
         }
 
-        public Task<bool> RemovePostAsync(Guid postId)
+        public async Task<Post> GetPostByIdAsync(Guid postId)
         {
-            throw new NotImplementedException();
+            return datacontext.Posts.AsNoTracking().SingleOrDefault(x => x.Id == postId);
+        }
+
+        public async Task<bool> RemovePostAsync(Guid postId)
+        {
+            var post = await GetPostByIdAsync(postId);
+
+            datacontext.Posts.Remove(post);
+            var deleted = await datacontext.SaveChangesAsync();
+            return deleted > 0;
+        }
+
+        public async Task<bool> AddLikeToPostAsync(Guid postId)
+        {
+            var post = await GetPostByIdAsync(postId);
+            long likes = post.likes;
+
+            post.likes = likes + 1;
+            datacontext.Update(post);
+            var updated = await datacontext.SaveChangesAsync();
+
+            return updated > 0;
+
         }
     }
 }

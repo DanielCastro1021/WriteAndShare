@@ -156,8 +156,8 @@ namespace web_api_write_and_share.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),

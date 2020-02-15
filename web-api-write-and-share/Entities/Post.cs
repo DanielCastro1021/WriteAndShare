@@ -11,6 +11,7 @@ namespace web_api_write_and_share.Entities
         [Key]
         public Guid Id { get; set; }
         public string Title { get; set; }
+        public byte[] Upload { get; set; }
         public string Body { get; set; }
         public Guid userId { get; set; }
         public long likes { get; set; }
