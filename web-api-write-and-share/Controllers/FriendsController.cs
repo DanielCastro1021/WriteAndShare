@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using web_api_write_and_share.Contracts;
+using web_api_write_and_share.Entities;
 
 namespace web_api_write_and_share.Controllers
 {
@@ -17,7 +18,7 @@ namespace web_api_write_and_share.Controllers
         }
 
         [HttpPut(ApiRoutes.Identity.AddFriend)]
-        public async Task<IActionResult> AddFriend(Guid userid, [FromBody] Guid userToAdd)
+        public async Task<IActionResult> AddFriend(Guid userid, Guid userToAdd)
         {
             var added = await friendsService.AddFriendAsync(userid, userToAdd);
 
@@ -30,7 +31,7 @@ namespace web_api_write_and_share.Controllers
         }
 
         [HttpDelete(ApiRoutes.Identity.RemoveFriend)]
-        public async Task<IActionResult> RemoveFriend(Guid userid, [FromBody] Guid userToRemove)
+        public async Task<IActionResult> RemoveFriend(Guid userid, Guid userToRemove)
         {
             var removed = await friendsService.RemoveFriendAsync(userid, userToRemove);
 
@@ -45,7 +46,14 @@ namespace web_api_write_and_share.Controllers
         [HttpGet(ApiRoutes.Identity.GetAllFriends)]
         public async Task<IActionResult> GetAllFriends(Guid userid)
         {
-            return Ok(await friendsService.GetAllFriends(userid));
+            List<User> list = await friendsService.GetAllFriends(userid);
+
+            if(list.Count == 0)
+            {
+                return NoContent();
+            }
+
+            return Ok();
         }
     }
 }

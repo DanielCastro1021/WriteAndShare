@@ -23,6 +23,8 @@ namespace web_api_write_and_share.Installers
             services.AddSingleton(jwtSettings);
             
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IFriendsService, FriendsService>();
+            services.AddScoped<IPostService, PostService>();
 
             services.AddAuthentication(x =>
             {

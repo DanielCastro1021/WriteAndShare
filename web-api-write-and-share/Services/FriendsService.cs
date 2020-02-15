@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using web_api_write_and_share.Contracts;
 using web_api_write_and_share.Data;
 using web_api_write_and_share.Entities;
 
 namespace web_api_write_and_share.Services
 {
-    public class FriendsService
+    public class FriendsService : IFriendsService
     {
         private readonly DataContext datacontext;
-        private IdentityService identityService;
 
         public FriendsService(DataContext _datacontext)
         {
@@ -19,29 +20,26 @@ namespace web_api_write_and_share.Services
 
         public async Task<bool> AddFriendAsync(Guid user, Guid friend)
         {
-            User requester = await this.GetUserByIdAsync(user);
-            string friendsIds = requester.FriendsList;
 
-
-            if (friendsIds.Contains(friend.ToString()))
+            if (datacontext.Friends.Any(x => x.Id == user && x.FriendOfUserId == friend))
             {
                 return false;
             }
 
-            friendsIds = friendsIds + friend.ToString() + ";";
-
-            User userToUpdate = new User
+            Friends friendsConnection = new Friends
             {
-                UserName = requester.UserName,
-                Id = requester.Id,
-                Email = requester.Email,
-                FriendsList = friendsIds,
-                PasswordHash = requester.PasswordHash,
-                PasswordSalt = requester.PasswordSalt,
-                Roles = null
+                UserId = user,
+                FriendOfUserId = friend
             };
 
-            datacontext.Users.Update(userToUpdate);
+            Friends otherConnection = new Friends
+            {
+                UserId = friend,
+                FriendOfUserId = user
+            };
+
+            datacontext.Friends.Update(friendsConnection);
+            datacontext.Friends.Update(otherConnection);
             var updated = await datacontext.SaveChangesAsync();
 
             return updated > 0;
@@ -49,46 +47,39 @@ namespace web_api_write_and_share.Services
 
         public async Task<bool> RemoveFriendAsync(Guid user, Guid friend)
         {
-            User requester = await this.GetUserByIdAsync(user);
-            string friendsIds = requester.FriendsList;
-
-            if (!friendsIds.Contains(friend.ToString()))
+            if (!datacontext.Friends.Any(x => x.Id == user && x.FriendOfUserId == friend))
             {
                 return false;
             }
 
-            friendsIds = friendsIds.Replace(friend.ToString() + ";", "");
+            datacontext.Friends.Remove(await this.FindConnectionsId(user, friend));
+            datacontext.Friends.Remove(await this.FindConnectionsId(friend, user));
+            var deleted = await datacontext.SaveChangesAsync();
 
-            User userToUpdate = new User
-            {
-                UserName = requester.UserName,
-                Id = requester.Id,
-                Email = requester.Email,
-                FriendsList = friendsIds,
-                PasswordHash = requester.PasswordHash,
-                PasswordSalt = requester.PasswordSalt,
-                Roles = null
-            };
-
-            datacontext.Users.Update(userToUpdate);
-            var updated = await datacontext.SaveChangesAsync();
-
-            return updated > 0;
+            return deleted > 0;
         }
 
         public async Task<List<User>> GetAllFriends(Guid user)
         {
-            List<User> friends = new List<User>();
-            User requester = await this.GetUserByIdAsync(user);
+            Friends[] connections = await datacontext.Friends.AsNoTracking().Where(x => x.UserId == user).ToArrayAsync();
+            List<User> friendsOfUser = new List<User>();
 
-            string[] friendsIds = requester.FriendsList.Split(";");
-
-            for (int i = 0; i < friendsIds.Length; i++)
+            for(int i=0; i< connections.Length; i++)
             {
-                friends.Add(datacontext.Users.AsNoTracking().SingleOrDefault(x => x.Id == new Guid(friendsIds[i])));
+                friendsOfUser.Add(await FindUser(connections[i].FriendOfUserId));
             }
 
-            return friends;
+            return friendsOfUser;
+        }
+
+        private async Task<Friends> FindConnectionsId(Guid user, Guid friend)
+        {
+            return datacontext.Friends.AsNoTracking().SingleOrDefault(x => x.UserId == user && x.FriendOfUserId == friend);
+        }
+
+        private async Task<User> FindUser(Guid user)
+        {
+            return datacontext.Users.AsNoTracking().SingleOrDefault(x => x.Id == user);
         }
     }
 }

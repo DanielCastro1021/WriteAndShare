@@ -122,7 +122,7 @@ namespace web_api_write_and_share.Services
                 Email = dataToUpdate.Email,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Roles = null
+                Roles = userToUpdate.Roles
             };
 
             datacontext.Users.Update(userToUpdate);

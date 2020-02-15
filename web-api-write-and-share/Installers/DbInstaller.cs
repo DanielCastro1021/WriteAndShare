@@ -19,6 +19,8 @@ namespace web_api_write_and_share.Installers
             services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
           
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IFriendsService, FriendsService>();
+            services.AddScoped<IPostService, PostService>();
         }
     }
 }
