@@ -1,18 +1,29 @@
+.example-card {
+  background-color: #111;
+}
+
 div {
   border-radius: 5px;
   background-color: #d75b5a;
   padding: 20px;
   align-self: center;
 }
-
+mat-card {
+  border-radius: 20px;
+  padding: 30px;
+}
+mat-card-actions {
+  padding-left: 10px;
+  width: 100%;
+}
 h2 {
+  width: 100%;
   text-align: center;
   border-radius: 5px;
-
   margin: 0 auto;
   align-self: center;
   color: white;
-  background-color: black;
+  background-color: #111;
   padding: 20px;
 }
 
@@ -30,7 +41,7 @@ input[type="password"] {
 button {
   margin-right: 5px;
   background-color: #ffffff;
-  color: black;
+  color: #111;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -46,39 +57,4 @@ label {
   float: left;
   width: 10em;
   margin-right: 1em;
-}
-
-.login {
-  width: 50%;
-  margin: 0 auto;
-}
-.btn-group {
-  width: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-.btn-group button {
-  width: 50%;
-  background-color: white; /* Green background */
-  border: 1px solid #d75b5a; /* Green border */
-  color: black; /* White text */
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  float: left; /* Float the buttons side by side */
-}
-
-/* Clear floats (clearfix hack) */
-.btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
-
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: #ccc;
 }
