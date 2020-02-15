@@ -156,38 +156,6 @@ namespace web_api_write_and_share.Controllers
             return NotFound();
         }
 
-        [HttpPut(ApiRoutes.Identity.AddFriend)]
-        public async Task<IActionResult> AddFriend(Guid userid, [FromBody] Guid userToAdd)
-        {
-            var added = await identityService.AddFriendAsync(userid, userToAdd);
-
-            if (added)
-            {
-                return Ok();
-            }
-
-            return BadRequest();
-        }
-
-        [HttpDelete(ApiRoutes.Identity.RemoveFriend)]
-        public async Task<IActionResult> RemoveFriend(Guid userid, [FromBody] Guid userToRemove)
-        {
-            var removed = await identityService.RemoveFriendAsync(userid, userToRemove);
-
-            if (removed)
-            {
-                return NoContent();
-            }
-
-            return NotFound();
-        }
-
-        [HttpGet(ApiRoutes.Identity.GetAllFriends)]
-        public async Task<IActionResult> GetAllFriends(Guid userid)
-        {
-            return Ok(await identityService.GetAllFriends(userid));
-        }
-
         private bool ValidatePassword(string password, out string ErrorMessage)
         {
             var input = password;

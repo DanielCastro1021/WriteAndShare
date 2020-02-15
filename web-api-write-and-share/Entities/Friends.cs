@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace web_api_write_and_share.Entities
 {
-    public class User
+    public class Friends
     {
         [Key]
         public Guid Id { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
-        public string Roles { get; set; }
+        public Guid UserId { get; set; }
+        public Guid FriendOfUserId { get; set; }
     }
 }

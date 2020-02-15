@@ -76,7 +76,6 @@ namespace web_api_write_and_share.Services
             {
                 Email = request.Email,
                 UserName = request.UserName,
-                FriendsList = "",
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
@@ -121,7 +120,6 @@ namespace web_api_write_and_share.Services
                 UserName = dataToUpdate.UserName,
                 Id = userToUpdate.Id,
                 Email = dataToUpdate.Email,
-                FriendsList = userToUpdate.FriendsList,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 Roles = null
@@ -190,81 +188,6 @@ namespace web_api_write_and_share.Services
             return true;
         }
 
-        public async Task<bool> AddFriendAsync(Guid user, Guid friend)
-        {
-            User requester = await this.GetUserByIdAsync(user);
-            string friendsIds = requester.FriendsList;
-
-
-            if (friendsIds.Contains(friend.ToString()))  
-            {
-                return false;
-            }
-
-            Console.WriteLine(friend);
-            Console.WriteLine(friend.ToString());
-
-            friendsIds = friendsIds + friend.ToString() + ";";
-
-            User userToUpdate = new User
-            {
-                UserName = requester.UserName,
-                Id = requester.Id,
-                Email = requester.Email,
-                FriendsList = friendsIds,
-                PasswordHash = requester.PasswordHash,
-                PasswordSalt = requester.PasswordSalt,
-                Roles = null
-            };
-
-            datacontext.Users.Update(userToUpdate);
-            var updated = await datacontext.SaveChangesAsync();
-
-            return updated > 0;
-        }
-
-        public async Task<bool> RemoveFriendAsync(Guid user, Guid friend)
-        {
-            User requester = await this.GetUserByIdAsync(user);
-            string friendsIds = requester.FriendsList;
-
-            if (!friendsIds.Contains(friend.ToString()))
-            {
-                return false;
-            }
-
-            friendsIds = friendsIds.Replace(friend.ToString() + ";", "");
-
-            User userToUpdate = new User
-            {
-                UserName = requester.UserName,
-                Id = requester.Id,
-                Email = requester.Email,
-                FriendsList = friendsIds,
-                PasswordHash = requester.PasswordHash,
-                PasswordSalt = requester.PasswordSalt,
-                Roles = null
-            };
-
-            datacontext.Users.Update(userToUpdate);
-            var updated = await datacontext.SaveChangesAsync();
-
-            return updated > 0;
-        }
-
-        public async Task<List<User>> GetAllFriends(Guid user)
-        {
-            List<User> friends = new List<User>();
-            User requester = await this.GetUserByIdAsync(user);
-            string[] friendsIds = requester.FriendsList.Split(";");
-
-            for(int i=0; i<friendsIds.Length; i++)
-            {
-                friends.Add(await this.GetUserByIdAsync(Guid.Parse(friendsIds[i])));
-            }
-
-            return friends;
-        }
     }
 
 }
