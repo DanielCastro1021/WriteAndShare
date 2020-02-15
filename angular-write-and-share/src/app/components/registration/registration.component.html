@@ -1,0 +1,28 @@
+<div>
+  <h2>Sign Up</h2>
+  <div class="login">
+    <label>Username:</label
+    ><input
+      [(ngModel)]="userData.username"
+      type="text"
+      placeholder="username"
+    />
+    <br />
+    <label>Email:</label
+    ><input [(ngModel)]="userData.email" type="email" placeholder="email" />
+    <br />
+    <label>Password:</label
+    ><input
+      [(ngModel)]="userData.password"
+      type="password"
+      placeholder="password"
+    />
+    <br />
+    <label>Confirm Password:</label
+    ><input [(ngModel)]="cpassword" type="password" placeholder="cpassword" />
+  </div>
+  <div class="btn-group">
+    <button id="sign-up-button" (click)="register()">Sign Up</button>
+    <button id="sign-in-button" (click)="swithToSignInPage()">Sign In</button>
+  </div>
+</div>
