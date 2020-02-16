@@ -3,13 +3,8 @@
     Friends List
   </mat-toolbar>
   <div class="basic-container">
-    <mat-grid-list
-      cols="1"
-      rowHeight="fit"
-      gutterSize="1px"
-      [style.height]="'200px'"
-    >
-      <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]">
+    <mat-grid-list cols="1" rowHeight="70px">
+      <mat-grid-tile *ngFor="let friend of friendsList">
         <mat-card [style.width]="'100%'">
           <div fxLayout="row">
             <div fxFlex="10">
@@ -17,7 +12,7 @@
             </div>
 
             <div fxFlex fxFlexAlign="center">
-              <div fxLayout="row">Friend {{ i }}</div>
+              <div fxLayout="row">{{ friend.username }}</div>
             </div>
 
             <div fxFlex="10px" fxFlexAlign="center">
@@ -29,7 +24,9 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #appMenu="matMenu" xPosition="after">
-                <button mat-menu-item>Remover Amigo</button>
+                <button mat-menu-item (click)="removeFriend(friend._id)">
+                  Remover Amigo
+                </button>
               </mat-menu>
             </div>
           </div>
