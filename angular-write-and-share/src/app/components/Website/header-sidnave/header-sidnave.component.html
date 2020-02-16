@@ -11,10 +11,10 @@
             <a mat-list-item *ngIf="isAuthenticated" href="#">
                 <mat-icon>add</mat-icon> New Post
             </a>
-            <a mat-list-item href="/feed">
+            <a mat-list-item [routerLink]="/feed">
                 <mat-icon>whatshot</mat-icon>Feed
             </a>
-            <a mat-list-item href="/">
+            <a mat-list-item href="#">
                 <mat-icon>trending_up</mat-icon>Trends
             </a>
             <a mat-list-item *ngIf="isAuthenticated" href="#">
@@ -52,7 +52,7 @@
                 </button>
                 <mat-menu #menuAuthenticated="matMenu" xPosition="after">
                     <button mat-menu-item>Perfil</button>
-                    <button mat-menu-item>Logout</button>
+                    <button mat-menu-item (click)="logout()">Logout</button>
                 </mat-menu>
             </ul>
         </mat-toolbar>

@@ -4,7 +4,7 @@ import { FeedComponent } from './components/Website/feed/feed.component';
 
 
 const routes: Routes = [
-{path:"feed",  component:FeedComponent}];
+{path:'feed',  component:FeedComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

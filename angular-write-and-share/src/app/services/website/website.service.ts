@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 import { Publication } from 'src/app/Models/Publication';
 import { Observable } from 'rxjs';
 
-const endpoint = "http://localhost:5001/api/v1/post/"
+const endpoint = "http://localhost:5001/Post/api/v1/post/"
 
 const httpOptions = {
   headers: new HttpHeaders({
