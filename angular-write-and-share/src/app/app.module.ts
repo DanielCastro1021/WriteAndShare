@@ -5,7 +5,7 @@ import { AppComponent } from "./app.component";
 import { MainPageComponent } from "./components/website/main-page/main-page.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FriendsListComponent } from "./components/friends/friends-list/friends-list.component";
-
+import { HttpClientModule } from "@angular/common/http";
 import { A11yModule } from "@angular/cdk/a11y";
 import { BidiModule } from "@angular/cdk/bidi";
 import { ObserversModule } from "@angular/cdk/observers";
@@ -57,7 +57,8 @@ import { MatMenuModule } from "@angular/material/menu";
     MatDialogModule,
     MatGridListModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
