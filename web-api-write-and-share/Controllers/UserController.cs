@@ -37,15 +37,6 @@ namespace web_api_write_and_share.Controllers
                 return BadRequest(erro.ToString());
             }
 
-            if (!(request.Password == request.ComparePassword))
-            {
-                return BadRequest(
-                    new FailedResponse
-                    {
-                        Errors = new[] { "As passwords não coincidem!" }
-                    });
-            }
-
             if (!IsValidEmail(request.Email) || request.Email == string.Empty)
             {
                 return BadRequest(new FailedResponse
