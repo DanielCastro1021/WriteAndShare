@@ -10,7 +10,7 @@
                         <td>
                             <mat-form-field class="exemple-not-full">
                                 <mat-label>Titulo</mat-label>
-                                <input matInput type="text" [(ngModel)]="publicationData.titulo">
+                                <input matInput type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="publicationData.titulo">
                             </mat-form-field>
                         </td>
                     </tr>
@@ -20,7 +20,7 @@
                         <td>
                             <mat-form-field class="exemple-not-full">
                                 <mat-label>Categorias</mat-label>
-                                <input matInput type="text" [(ngModel)]="publicationData.tags">
+                                <input matInput type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="publicationData.tags">
                             </mat-form-field>
                         </td>
                     </tr>
@@ -29,7 +29,7 @@
 
                 <mat-form-field class="example-full-width size_textarea">
                     <mat-label>Content</mat-label>
-                    <textarea class="size_textarea" matInput [(ngModel)]="publicationData.body" placeholder="Descrição"></textarea>
+                    <textarea class="size_textarea" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="publicationData.body" placeholder="Descrição"></textarea>
                 </mat-form-field>
 
 

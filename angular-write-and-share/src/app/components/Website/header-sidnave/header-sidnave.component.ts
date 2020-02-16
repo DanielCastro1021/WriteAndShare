@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { WebsiteService } from 'src/app/services/website/website.service';
+import { Token } from 'src/app/Models/Token'
 @Component({
   selector: 'app-header-sidnave',
   templateUrl: './header-sidnave.component.html',
@@ -9,32 +11,35 @@ import { Router } from '@angular/router';
 })
 export class HeaderSidnaveComponent implements OnInit {
 
+  token: Token;
+
   isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
 
-  constructor(private breakpointObserver: BreakpointObserver, private router:Router) { }
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private webservice: WebsiteService) { }
 
   //Chamar authentication Service no constructor
 
- 
-  username = "Example";
 
-  isAuthenticated: boolean;
+  username = null;
+
+  isAuthenticated = false;
 
   ngOnInit(): void {
-    this.isAuthenticated = true;
-     //const token = localStorage.getItem("token");
-  //if(token){
-   // this.isAuthenticated=true;
-   //this.router.navigate(["/"]);
-   //this.router.navigate(["/feed"]);
-  //}
-   
+    this.token = new Token();
+    this.token = this.webservice.decodeToken();
 
+    console.log(this.token);
+    if (this.token) {
+      this.username = this.token.nameId;
+      this.isAuthenticated = true;
+    }
+    this.router.navigate(["/"]);
+    this.router.navigate(["/feed"]);
   }
 
   logout() {
     //this.serviceAuth.logout();
     this.isAuthenticated = false;
-    //this.router.navigate(["/"]);
+    this.router.navigate(["/"]);
   }
 }
