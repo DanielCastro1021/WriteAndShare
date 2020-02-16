@@ -19,7 +19,7 @@ const httpOptions = {
 })
 
 export class WebsiteService {
-  c
+  
   constructor(private http: HttpClient) { }
 
   getposts(): Observable<Publication[]> {
@@ -30,7 +30,7 @@ export class WebsiteService {
 
   createpost(publication: Publication, userId): any {
     return this.http
-      .post<any>(endpoint + { userId } + "newpost", { publication });
+      .post<any>(endpoint + { userId } + "/newpost", { publication });
   }
 
   decodeToken(): Token {
