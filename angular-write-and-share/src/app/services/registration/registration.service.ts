@@ -8,7 +8,7 @@ import {
 import { map } from "rxjs/operators";
 import { User } from "../../models/User";
 
-const endpoint = "http://localhost:3000/api/resgistration/";
+const endpoint = "https://localhost:5001/User/api/v1/identity/";
 @Injectable({
   providedIn: "root"
 })
@@ -23,11 +23,11 @@ export class RegistrationService {
     return this.http
       .post<any>(endpoint + "register", { user })
       .pipe(
-        map(user => {
+        map(token => {
           // login successful if there's a jwt token in the response
-          if (user && user.token) {
+          if (token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem("currentUser", JSON.stringify(user));
+            localStorage.setItem("token", JSON.stringify(token));
           }
           return user;
         })

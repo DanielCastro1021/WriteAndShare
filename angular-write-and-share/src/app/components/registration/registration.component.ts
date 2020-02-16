@@ -52,6 +52,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   swithToSignInPage() {
-    this.router.navigate(["/sign_in"]);
+    this.router.navigate(["/"]);
+    this.router.navigate(["/feed"]);
   }
 }
