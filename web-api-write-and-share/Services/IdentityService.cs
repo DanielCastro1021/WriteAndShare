@@ -77,7 +77,8 @@ namespace web_api_write_and_share.Services
                 Email = request.Email,
                 UserName = request.UserName,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                Role = "User"
             };
 
             datacontext.Users.Add(newUser);
@@ -138,7 +139,7 @@ namespace web_api_write_and_share.Services
                 Email = dataToUpdate.Email,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Roles = userToUpdate.Roles
+                Role = userToUpdate.Role
             };
 
             datacontext.Users.Update(userToUpdate);
@@ -154,11 +155,12 @@ namespace web_api_write_and_share.Services
             var key = Encoding.ASCII.GetBytes(jwt.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
+                Subject = new ClaimsIdentity(new Claim[]
                 {
-                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                 new Claim(ClaimTypes.Name, user.Id.ToString()),
+                 new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                 new Claim(ClaimTypes.Email, user.Email),
+                 new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

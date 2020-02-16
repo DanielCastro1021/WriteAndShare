@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace web_api_write_and_share.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,7 @@ namespace web_api_write_and_share.Migrations
                     Email = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<byte[]>(nullable: true),
                     PasswordSalt = table.Column<byte[]>(nullable: true),
-                    Roles = table.Column<string>(nullable: true)
+                    Role = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

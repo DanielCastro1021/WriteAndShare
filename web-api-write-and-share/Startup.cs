@@ -24,6 +24,8 @@ namespace web_api_write_and_share
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            services.AddControllers();
             services.InstallServicesInAssembly(Configuration);
         }
 
@@ -41,9 +43,14 @@ namespace web_api_write_and_share
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthentication();
-
+            app.UseAuthorization();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => {

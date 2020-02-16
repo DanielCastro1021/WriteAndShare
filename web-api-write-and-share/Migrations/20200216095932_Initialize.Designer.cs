@@ -10,8 +10,8 @@ using web_api_write_and_share.Data;
 namespace web_api_write_and_share.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200215165306_Initial")]
-    partial class Initial
+    [Migration("20200216095932_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,7 +85,7 @@ namespace web_api_write_and_share.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Roles")
+                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")

@@ -14,6 +14,6 @@ namespace web_api_write_and_share.Entities
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public string Roles { get; set; }
+        public string Role { get; set; }
     }
 }

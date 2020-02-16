@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,9 @@ using web_api_write_and_share.Entities;
 
 namespace web_api_write_and_share.Controllers
 {
+    [Authorize]
+    [ApiController]
+    [Route("[controller]")]
     public class UserController : Controller
     {
         private readonly IIdentityService identityService;
@@ -21,6 +25,7 @@ namespace web_api_write_and_share.Controllers
             identityService = _identityService;
         }
 
+        [AllowAnonymous]
         [HttpPost(ApiRoutes.Identity.Register)]
 
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
@@ -65,7 +70,7 @@ namespace web_api_write_and_share.Controllers
 
         }
 
-
+        [AllowAnonymous]
         [HttpPost(ApiRoutes.Identity.Login)]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
@@ -89,6 +94,12 @@ namespace web_api_write_and_share.Controllers
         [HttpGet(ApiRoutes.Identity.GetUserById)]
         public async Task<IActionResult> GetUserById(Guid userId)
         {
+            // only allow admins to access other user records
+            var currentUserId = User.Identity.Name;
+            if (userId.ToString() != currentUserId && !User.IsInRole(Role.Admin)) { 
+                return Forbid();
+            }
+
             var user = await identityService.GetUserByIdAsync(userId);
 
             if (user == null)
@@ -100,6 +111,8 @@ namespace web_api_write_and_share.Controllers
             return Ok(user);
         }
 
+        [Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = Role.User)]
         [HttpGet(ApiRoutes.Identity.GetAllUsers)]
         public async Task<IActionResult> GetUsers()
         {
@@ -192,7 +205,7 @@ namespace web_api_write_and_share.Controllers
             }
         }
 
-        public bool IsValidEmail(string source)
+        private bool IsValidEmail(string source)
         {
             return new EmailAddressAttribute().IsValid(source);
         }

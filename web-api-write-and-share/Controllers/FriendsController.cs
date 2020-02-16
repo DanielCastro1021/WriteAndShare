@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,9 @@ using web_api_write_and_share.Entities;
 
 namespace web_api_write_and_share.Controllers
 {
+    [Authorize]
+    [ApiController]
+    [Route("[controller]")]
     public class FriendsController : Controller
     {
         private readonly IFriendsService friendsService;
@@ -16,6 +20,7 @@ namespace web_api_write_and_share.Controllers
         {
             friendsService = _friendsService;
         }
+
 
         [HttpPut(ApiRoutes.Identity.AddFriend)]
         public async Task<IActionResult> AddFriend(Guid userId, Guid friendId)

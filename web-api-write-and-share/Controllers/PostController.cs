@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ using web_api_write_and_share.Entities;
 
 namespace web_api_write_and_share.Controllers
 {
+    [Authorize]
+    [ApiController]
+    [Route("[controller]")]
     public class PostController : Controller
     {
         private readonly IPostService postService;
@@ -18,6 +22,7 @@ namespace web_api_write_and_share.Controllers
             postService = _postService;
         }
 
+        [Authorize(Roles = Role.User)]
         [HttpPost(ApiRoutes.Identity.AddPost)]
         public async Task<IActionResult> AddPost(Guid userId, [FromBody] NewPostRequest newpost)
         {
