@@ -1,0 +1,38 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title> <h2>Sign Up</h2> </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="login">
+      <label>Username:</label
+      ><input
+        [(ngModel)]="userData.username"
+        type="text"
+        placeholder="username"
+      />
+      <br />
+      <label>Email:</label
+      ><input [(ngModel)]="userData.email" type="email" placeholder="email" />
+      <br />
+      <label>Password:</label
+      ><input
+        [(ngModel)]="userData.password"
+        type="password"
+        placeholder="password"
+      />
+      <br />
+      <label>Confirm Password:</label
+      ><input [(ngModel)]="cpassword" type="password" placeholder="cpassword" />
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button id="sign-up-button" (click)="register()">Sign Up</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <p style="color: white;">
+      Allready Registered?
+      <a id="sign-in-button" (click)="swithToSignInPage()">Sign In</a>
+    </p>
+  </mat-card-footer>
+</mat-card>
