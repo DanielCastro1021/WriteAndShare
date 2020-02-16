@@ -1,0 +1,45 @@
+<div>
+    <mat-accordion>
+        <mat-card class="card-layout centered">
+            <form class="example-form">
+
+                <h2>Nova Publicação</h2>
+
+                <table class="example-full-width" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="exemple-not-full">
+                                <mat-label>Titulo</mat-label>
+                                <input matInput type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="publicationData.titulo">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <table class="example-full-width" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="exemple-not-full">
+                                <mat-label>Categorias</mat-label>
+                                <input matInput type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="publicationData.tags">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <mat-form-field class="example-full-width size_textarea">
+                    <mat-label>Content</mat-label>
+                    <textarea class="size_textarea" matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="publicationData.body" placeholder="Descrição"></textarea>
+                </mat-form-field>
+
+
+            </form>
+            <mat-card-header>
+                <div class="align_buttons">
+                    <button class="buttons_align" mat-raised-button (click)="cancelar()">Cancelar</button>
+                    <button class="buttons_align" mat-raised-button (click)="publicar()">Publicar</button>
+                </div>
+            </mat-card-header>
+        </mat-card>
+    </mat-accordion>
+</div>
