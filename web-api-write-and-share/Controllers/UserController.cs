@@ -94,12 +94,6 @@ namespace web_api_write_and_share.Controllers
         [HttpGet(ApiRoutes.Identity.GetUserById)]
         public async Task<IActionResult> GetUserById(Guid userId)
         {
-            // only allow admins to access other user records
-            var currentUserId = User.Identity.Name;
-            if (userId.ToString() != currentUserId && !User.IsInRole(Role.Admin)) { 
-                return Forbid();
-            }
-
             var user = await identityService.GetUserByIdAsync(userId);
 
             if (user == null)
@@ -111,8 +105,6 @@ namespace web_api_write_and_share.Controllers
             return Ok(user);
         }
 
-        [Authorize(Roles = Role.Admin)]
-        [Authorize(Roles = Role.User)]
         [HttpGet(ApiRoutes.Identity.GetAllUsers)]
         public async Task<IActionResult> GetUsers()
         {
@@ -136,7 +128,6 @@ namespace web_api_write_and_share.Controllers
         [HttpPut(ApiRoutes.Identity.UpdateUser)]
         public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] UserUpdateRequest request)
         {
-
             string erro;
 
             if (!ValidatePassword(request.Password, out erro))

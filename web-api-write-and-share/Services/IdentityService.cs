@@ -157,12 +157,13 @@ namespace web_api_write_and_share.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                 new Claim(ClaimTypes.Name, user.Id.ToString()),
-                 new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                 new Claim(ClaimTypes.Email, user.Email),
-                 new Claim(ClaimTypes.Role, user.Role)
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Role, user.Role)
                 }),
-                Expires = DateTime.UtcNow.AddHours(2),
+
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 
             };

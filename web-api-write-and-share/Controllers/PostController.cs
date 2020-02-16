@@ -22,7 +22,6 @@ namespace web_api_write_and_share.Controllers
             postService = _postService;
         }
 
-        [Authorize(Roles = Role.User)]
         [HttpPost(ApiRoutes.Identity.AddPost)]
         public async Task<IActionResult> AddPost(Guid userId, [FromBody] NewPostRequest newpost)
         {
@@ -50,6 +49,7 @@ namespace web_api_write_and_share.Controllers
             return NotFound();
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Identity.GetPostById)]
         public async Task<IActionResult> GetPostById(Guid postId)
         {
@@ -77,6 +77,7 @@ namespace web_api_write_and_share.Controllers
             return Ok(postsList);
         }
 
+        [AllowAnonymous]
         [HttpGet(ApiRoutes.Identity.GetAllPosts)]
         public async Task<IActionResult> GetAllPost()
         {
