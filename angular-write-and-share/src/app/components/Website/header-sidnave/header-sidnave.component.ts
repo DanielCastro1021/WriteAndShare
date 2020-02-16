@@ -21,7 +21,7 @@ export class HeaderSidnaveComponent implements OnInit {
   isAuthenticated: boolean;
 
   ngOnInit(): void {
-    this.isAuthenticated = false;
+    this.isAuthenticated = true;
      //const token = localStorage.getItem("token");
   //if(token){
    // this.isAuthenticated=true;

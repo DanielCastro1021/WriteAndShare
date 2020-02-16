@@ -18,12 +18,14 @@ import {MatInputModule} from '@angular/material/input';
 
 import { HeaderSidnaveComponent } from './components/Website/header-sidnave/header-sidnave.component';
 import { FeedComponent } from './components/Website/feed/feed.component';
+import { CriarPublicacaoComponent } from './components/Website/criar-publicacao/criar-publicacao.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderSidnaveComponent,
-    FeedComponent
+    FeedComponent,
+    CriarPublicacaoComponent
   ],
   imports: [
     BrowserModule,
