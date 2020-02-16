@@ -1,0 +1,121 @@
+.ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .ul {
+    display: flex;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  }
+  .sidnave{
+  width: 200px;
+  height: 100%;
+  background-color: #111;
+  color: #111;
+  
+  }
+  .mat-nav-list{
+  fill: #000;
+   overflow-x: hidden;
+  
+  }
+  .mat-list-item{
+  color: white;
+  margin-left: 10px;
+  align-self: center;
+  margin-top: 30px;
+  }
+  
+  mat-sidenav a{
+  overflow-x: hidden;
+  }
+  
+  mat-sidenav a mat-icon{
+  margin: 5px;
+  }
+  .cor{
+  background-color: #111;
+  color: #000;
+  }
+  .titulo{
+  color: white;
+  
+  }
+  
+  .card-layout{
+  margin-top: 100px;
+  margin-bottom: 30px;  
+  max-width: 500px;
+  align-self: auto;
+  }
+  
+  .centered {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  }
+  
+  .example-header-image{
+  background-size: cover;
+  max-width: 20px;
+  }
+  
+  .search-hero {
+  top: 50%;
+  left: 50%;
+  max-width: 300px;
+  padding-bottom: 50px;
+  margin:auto;
+  }
+  
+  .form-control {
+    margin-top: 20px;
+  border-radius: 5px;
+    height: 20px;
+  width: 300px;
+  }
+  .form-control::placeholder  {
+  font-family: Arial, Helvetica, sans-serif;
+  }
+
+.buttons_align{
+    margin: 10px;
+}
+  .align_buttons{
+      max-width: 700px;
+      max-height: 700px;
+  }
+  .size_textarea{
+      max-width: 500px;
+      max-height: 500px;
+    
+  }
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  td {
+    padding-right: 8px;
+  }
+  .exemple-not-full{
+      width: 25%;
+  }

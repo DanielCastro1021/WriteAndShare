@@ -4,7 +4,7 @@ export class Publication{
     owner:string;
     tags:string;
     likes:Number;
-    upload:Number;
+    upload:string;
 
 
 

@@ -15,15 +15,18 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import{HttpClientModule} from '@angular/common/http'
 
 import { HeaderSidnaveComponent } from './components/Website/header-sidnave/header-sidnave.component';
 import { FeedComponent } from './components/Website/feed/feed.component';
+import { CriarPublicacaoComponent } from './components/Website/criar-publicacao/criar-publicacao.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderSidnaveComponent,
-    FeedComponent
+    FeedComponent,
+    CriarPublicacaoComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { FeedComponent } from './components/Website/feed/feed.component';
     MatExpansionModule,
     FormsModule,
     MatInputModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
