@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WebsiteService } from 'src/app/services/website/website.service';
+import { Publication } from 'src/app/Models/Publication';
 
 
 @Component({
@@ -8,8 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
-  constructor() { }
+  publicacoes:Publication[];
+
+  constructor(private Service: WebsiteService) { }
   
+
+  ngOnInit(): void {
+   this.Service.getposts().subscribe((posts:Publication[])=> this.publicacoes = posts);
+  }
+
   searchText; 
 
   count = 0;
@@ -20,16 +29,6 @@ export class FeedComponent implements OnInit {
     return this.count += 1;
   }
 
-  cards = [
-    { title: 'Shiba InuShiba Inu', subtitle: 'Dog Breed', src: "https://material.angular.io/assets/img/examples/shiba2.jpg", body: 'teste' },
-    { title: 'Shiba InuShiba Inu', subtitle: 'Dog Bree', src: 'https://material.angular.io/assets/img/examples/shiba2.jpg', body: 'Tesste1'},
-    {
-      title: 'Shiba InuShiba Inu', subtitle: 'Dog Breed', src: 'https://material.angular.io/assets/img/examples/shiba2.jpg', body: 'teste2'
-    },
   
-  {title:'Jose', subtitle:'cao de caça', src:'https://i.imgur.com/ueMY27J.png', body:'Criação do novo website WriteAndShare tem crescido nas trends'}];
-
-  ngOnInit(): void {
-  }
 
 }

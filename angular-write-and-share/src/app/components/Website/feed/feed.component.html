@@ -3,7 +3,7 @@
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on"
             placeholder="&#61442;  Encontra o teu post favorito">
     </div>
-    <mat-accordion *ngFor="let card of cards | filter:searchText">
+    <mat-accordion *ngFor="let card of publicacoes | filter:searchText">
         <!-- | -->
         <mat-card class="card-layout centered">
             <mat-card-header>
