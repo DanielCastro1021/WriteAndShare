@@ -10,23 +10,23 @@ import { JwtInterceptor } from "./helper/jwt.interceptor";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatCardModule } from "@angular/material/card";
 import { RegistrationComponent } from "./components/registration/registration.component";
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import { HeaderSidnaveComponent } from './components/Website/header-sidnave/header-sidnave.component';
-import { FeedComponent } from './components/Website/feed/feed.component';
-import { CriarPublicacaoComponent } from './components/Website/criar-publicacao/criar-publicacao.component';
+import { MatMenuModule } from "@angular/material/menu";
+import { MatButtonModule } from "@angular/material/button";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
+import { MatIconModule } from "@angular/material/icon";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { MatInputModule } from "@angular/material/input";
+import { HeaderSidnaveComponent } from "./components/Website/header-sidnave/header-sidnave.component";
+import { FeedComponent } from "./components/Website/feed/feed.component";
+import { CriarPublicacaoComponent } from "./components/Website/criar-publicacao/criar-publicacao.component";
+import { MatToolbarModule } from "@angular/material/toolbar";
 @NgModule({
-  declarations: [AppComponent,
-   AuthenticationComponent,
-   RegistrationComponent,
+  declarations: [
+    AppComponent,
+    AuthenticationComponent,
+    RegistrationComponent,
     HeaderSidnaveComponent,
     FeedComponent,
     CriarPublicacaoComponent
@@ -38,7 +38,7 @@ import { CriarPublicacaoComponent } from './components/Website/criar-publicacao/
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
     MatToolbarModule,
     MatMenuModule,
     MatButtonModule,
@@ -49,7 +49,7 @@ import { CriarPublicacaoComponent } from './components/Website/criar-publicacao/
     MatExpansionModule,
     FormsModule,
     MatInputModule,
-    Ng2SearchPipeModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
