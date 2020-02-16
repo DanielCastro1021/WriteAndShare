@@ -26,6 +26,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
   declarations: [AppComponent, MainPageComponent, FriendsListComponent],
@@ -55,7 +56,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatDatepickerModule,
     MatDialogModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
