@@ -7,7 +7,7 @@ import {
 
 import { map } from "rxjs/operators";
 
-const endpoint = "http://localhost:3000/api/auth/";
+const endpoint = "https://localhost:5001/User/api/v1/identity/";
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type": "application/json"
@@ -28,13 +28,13 @@ export class AuthenticationService {
     return this.http
       .post<any>(endpoint + "login", { username, password })
       .pipe(
-        map(user => {
+        map(token => {
           // login successful if there's a jwt token in the response
-          if (user && user.token) {
+          if (token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem("currentUser", JSON.stringify(user));
+            localStorage.setItem("token", JSON.stringify(token));
           }
-          return user;
+          return token;
         })
       );
   }
@@ -43,7 +43,7 @@ export class AuthenticationService {
    * This function makes a http get request to REST API, to logout a user and removes credentials from localStorage.
    */
   logout() {
-    localStorage.removeItem("currentUser");
+    localStorage.removeItem("token");
     return this.http.get<any>(endpoint + "logout");
   }
 }
