@@ -17,20 +17,19 @@ export class FriendsListComponent implements OnInit {
   }
 
   public getFriendsList(): void {
-    this.friendsService
-      .getFriends(this.friendsService.decodePayloadJWT().unique_name)
-      .subscribe(
-        (friendsList: User[]) => (this.friendsList = friendsList),
-        err => {
-          console.log(err);
-        }
-      );
+    const id = this.friendsService.decodePayloadJWT().unique_name;
+    this.friendsService.getFriends(id).subscribe(
+      (friendsList: User[]) => (this.friendsList = friendsList),
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   public removeFriend(_id: string): void {
-    this.friendsService
-      .removeFriend(this.friendsService.decodePayloadJWT().unique_name, _id)
-      .subscribe(
+    const id = this.friendsService.decodePayloadJWT().unique_name;
+    if (id) {
+      this.friendsService.removeFriend(id, _id).subscribe(
         result => {
           console.log(result);
         },
@@ -38,5 +37,6 @@ export class FriendsListComponent implements OnInit {
           console.log(err);
         }
       );
+    }
   }
 }

@@ -50,7 +50,7 @@ export class FriendsService {
   }
   public decodePayloadJWT(): any {
     const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(this.getToken());
+    const decodedToken = helper.decodeToken(this.getToken()).unique_name;
     return decodedToken;
   }
 }
