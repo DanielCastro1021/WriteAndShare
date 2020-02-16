@@ -50,9 +50,4 @@ export class RegistrationComponent implements OnInit {
       }
     );
   }
-
-  swithToSignInPage() {
-    this.router.navigate(["/"]);
-    this.router.navigate(["/feed"]);
-  }
 }
