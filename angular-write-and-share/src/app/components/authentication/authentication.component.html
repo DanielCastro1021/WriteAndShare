@@ -6,10 +6,18 @@
   <mat-card-content>
     <div class="login">
       <label> Username:</label>
-      <input type="text" placeholder=" username" />
+      <input
+        [(ngModel)]="userData.username"
+        type="text"
+        placeholder=" username"
+      />
       <br />
       <label>Password:</label>
-      <input type="password" placeholder="password" />
+      <input
+        [(ngModel)]="userData.password"
+        type="password"
+        placeholder="password"
+      />
     </div>
   </mat-card-content>
   <mat-card-actions>

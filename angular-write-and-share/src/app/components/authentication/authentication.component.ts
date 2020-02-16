@@ -37,7 +37,7 @@ export class AuthenticationComponent implements OnInit {
       .login(this.userData.username, this.userData.password)
       .subscribe(
         result => {
-          this.router.navigate(["/campaigns"]);
+          this.router.navigate(["/feed"]);
         },
         err => {
           console.log(err);
