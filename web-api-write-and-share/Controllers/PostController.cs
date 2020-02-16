@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using web_api_write_and_share.Contracts;
 using web_api_write_and_share.Controllers.Requests;
+using web_api_write_and_share.Controllers.Response;
 using web_api_write_and_share.Entities;
 
 namespace web_api_write_and_share.Controllers
@@ -67,7 +68,7 @@ namespace web_api_write_and_share.Controllers
         [HttpGet(ApiRoutes.Identity.GetPostsByUser)]
         public async Task<IActionResult> GetAllPostsByUser(Guid userId)
         {
-            List<Post> postsList = await postService.GetAllPostsByUserAsync(userId);
+            List<PostResponse> postsList = await postService.GetAllPostsByUserAsync(userId);
 
             if (postsList.Count == 0)
             {
@@ -81,7 +82,7 @@ namespace web_api_write_and_share.Controllers
         [HttpGet(ApiRoutes.Identity.GetAllPosts)]
         public async Task<IActionResult> GetAllPost()
         {
-            List<Post> postsList = await postService.GetAllPostsAsync();
+            List<PostResponse> postsList = await postService.GetAllPostsAsync();
 
             if (postsList.Count == 0)
             {

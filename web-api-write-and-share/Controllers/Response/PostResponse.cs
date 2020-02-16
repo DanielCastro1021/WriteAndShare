@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace web_api_write_and_share.Controllers.Requests
+namespace web_api_write_and_share.Controllers.Response
 {
-    public class NewPostRequest
+    public class PostResponse
     {
-        [Required]
         public string Title { get; set; }
-        [Required]
         public string Upload { get; set; }
-        [Required]
         public string Body { get; set; }
-        [Required]
+        public string Owner { get; set; }
+        public long likes { get; set; }
         public string TAGS { get; set; }
-        [Required]
         public DateTime Date { get; set; }
     }
 }
